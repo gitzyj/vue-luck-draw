@@ -159,6 +159,7 @@
                     }
                 },
                 stop: function () {
+                    
                     let _this = this;
                     // console.log(_this.awards);
                     // this.currentAward === _this.awards.findIndex(function(x) {return x.name === "二等奖"})?console.log("3"):console.log("4");
@@ -183,15 +184,19 @@
                                 
                         //     }
                         // }
-                       
+                        console.log('this.players222',this.players.length)
                         if (this.currentAward === _this.awards.findIndex(function (x) { return x.name == _this.luckyFellow[i].names })) {
                             let c = this.players.findIndex(function (x) { return x.id == _this.luckyFellow[i].number });
-                            luckyboy.push(this.players.splice(c, 1)[0]);
+                            console.log('this.players',this.players.length)
+                            console.log('cccccc',c)
+                            let newplayers = this.players.concat()  
+                            luckyboy.push(newplayers.splice(c, 1)[0]);
                             
                         }
                     }
-                   let  luckNUm =this.awards[this.currentAward].count
+                   let  luckNUm =this.awards[this.currentAward].count // 查看奖池数量
                    console.log('luckyboy',luckyboy)
+                  
                    console.log('只能一个人中',this.awards[this.currentAward].count)
                     luckyboy.sort(function()  {
 
@@ -199,9 +204,10 @@
 
                         });
                    
-                   let newluckyboy =    luckyboy.slice(0,luckNUm) //限定几个人中
-                        console.log('newluckyboy',newluckyboy)
-
+                   let newluckyboy =    luckyboy.slice(0,luckNUm) //限定几个人中 中得人从奖池删除 this.players
+                       
+                   this.players = this.players.filter(item => !newluckyboy.some(e => e.id === item.id)); // 找到中奖得 删除奖池对应
+                
                     batchPlayers = [...newluckyboy]
                     for (var i = newluckyboy.length, ln = Math.min(N, todo, this.players.length + newluckyboy.length); i < ln; i++) {
                         this.a(batchPlayers);
@@ -218,6 +224,7 @@
                     //   this.players = this.copy(this.members);
                     //   this.$alert('所有人员都已中奖，剩余奖品将在现场所有人里抽取', '提示')
                     // }
+                    console.log('batchPlayers',batchPlayers)
                     this.batchPlayers = batchPlayers;
                     this.result.splice(
                         this.currentAward,
