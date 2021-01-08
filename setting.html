@@ -418,26 +418,41 @@
             created: function () {
                 var awards = JSON.parse(localStorage.getItem('awards')) || [
                     {
-                        name: '二等奖',
-                        award: 'Air pods',
-                        count: 3,
+                        name: '特等奖',
+                        award: '电视机',
+                        count: 1,
                     },
                     {
                         name: '一等奖',
-                        award: 'HUAWEI Mate30Pro',
+                        award: '洗衣机',
+                        count: 1,
+                    },
+                    {
+                        name: '二等奖',
+                        award: '小爱音箱',
                         count: 2,
                     },
                     {
-                        name: '特等奖',
-                        award: 'Apple MacPro',
-                        count: 1,
+                        name: '三等奖',
+                        award: '电饭锅',
+                        count: 3,
                     },
+                    
+                    {
+                        name: '四等奖',
+                        award: '保温杯',
+                        count: 6,
+                    },
+                    
+                    
+                    
+                    
                 ];
                 var members = JSON.parse(localStorage.getItem('members')) || window.members;
                 var luckyFellow = JSON.parse(localStorage.getItem('luckyFellow')) ||
                     [
                         {
-                            names: "特等奖",
+                            names: "四等奖",
                             number: "0",
                         },
                         // {
