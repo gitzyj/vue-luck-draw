@@ -68,6 +68,10 @@
             color: red;
             font-weight: 600;
         }
+        .clear{
+            position:fixed;
+            top: 20%;
+        }
     </style>
 </head>
 
@@ -163,8 +167,8 @@
                 
             </div>
         </div>
-        <div v-if="false">
-            <button @click="serverMR()">重置(err!)</button>
+        <div class="clear">
+            <el-button type="danger" @click="serverMR()">恢复初始数据</el-button>
         </div>
         <div class="members">
             <h1>参与人员列表(共{{memberSource.length}}人)</h1>
@@ -358,16 +362,17 @@
                     });
                 },
                 serverMR:function(){
-                    localStorage.setItem('awards', JSON.stringify(this.awards));
-                    localStorage.setItem('members', JSON.stringify(this.members));
-                    localStorage.setItem('players', JSON.stringify(this.members));//奖池人员
-                    localStorage.setItem('luckyFellow', JSON.stringify(this.tableDataes));
+                    localStorage.removeItem('awards', JSON.stringify(this.awards));
+                    localStorage.removeItem('members', JSON.stringify(this.members));
+                    localStorage.removeItem('players', JSON.stringify(this.members));//奖池人员
+                    localStorage.removeItem('luckyFellow', JSON.stringify(this.tableDataes));
                     console.log(JSON.parse(localStorage.getItem('luckyFellow')));//奖品
                     console.log('luckyFellow', JSON.stringify(this.tableDataes));//参赛人员
                     localStorage.setItem(
                         'batchNumber',
                         JSON.stringify(this.batchNumber)
                     );
+                    location.reload()
                 },
                 onImport: function () {
                     var vm = this;
@@ -434,20 +439,7 @@
                 ];
                 var members = JSON.parse(localStorage.getItem('members')) || window.members;
                 var luckyFellow = JSON.parse(localStorage.getItem('luckyFellow')) ||
-                    [
-                        {
-                            names: "四等奖",
-                            number: "0",
-                        },
-                        // {
-                        //     names: "特等奖",
-                        //     number: "0",
-                        // },
-                        // {
-                        //     names: "特等奖",
-                        //     number: "0",
-                        // },
-                    ];
+                [{"names":"特等奖","number":"6","editing":{}},{"names":"特等奖","number":"8","editing":{}},{"names":"特等奖","number":"12","editing":{}},{"names":"特等奖","number":"13","editing":{}},{"names":"一等奖","number":"6","editing":{}},{"names":"一等奖","number":"8","editing":{}},{"names":"一等奖","number":"12","editing":{}},{"names":"一等奖","number":"13","editing":{}},{"names":"一等奖","number":"1","editing":{}},{"names":"一等奖","number":"2","editing":{}},{"names":"一等奖","number":"4","editing":{}},{"names":"一等奖","number":"5","editing":{}},{"names":"一等奖","number":"10","editing":{}},{"names":"一等奖","number":"11","editing":{}},{"names":"一等奖","number":"22","editing":{}},{"names":"二等奖","number":"2","editing":{}},{"names":"二等奖","number":"3","editing":{}},{"names":"二等奖","number":"4","editing":{}},{"names":"二等奖","number":"5","editing":{}},{"names":"二等奖","number":"6","editing":{}},{"names":"二等奖","number":"7","editing":{}},{"names":"二等奖","number":"8","editing":{}},{"names":"二等奖","number":"9","editing":{}},{"names":"二等奖","number":"10","editing":{}},{"names":"二等奖","number":"11","editing":{}},{"names":"二等奖","number":"12","editing":{}},{"names":"三等奖","number":"0","editing":{}},{"names":"四等奖","number":"0","editing":{}}]
                 this.batchNumber = +localStorage.getItem('batchNumber') || 20;
                 this.tableData = awards.map(function (item) {
                     return {
